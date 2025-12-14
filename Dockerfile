@@ -21,7 +21,7 @@ RUN python -m pip install --upgrade pip \
 
 EXPOSE 8080
 
-# DigitalOcean App Platform commonly routes to 8080 by default.
+# Many hosting platforms provide the port via the PORT environment variable.
 ENV HOST=0.0.0.0 \
     PORT=8080
 
