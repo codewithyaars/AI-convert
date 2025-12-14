@@ -56,6 +56,20 @@ Each conversion job has a timeout (default **120s**) to avoid getting stuck.
 Override with:
 - `CSV2JSON_JOB_TIMEOUT_SECONDS`
 
+## DigitalOcean hosting (App Platform)
+This repo includes:
+- `Dockerfile` (runs `uvicorn` on port 8080)
+- `.do/app.yaml` (App Platform spec; deploy-on-push enabled)
+
+Deploy steps:
+1. In DigitalOcean, create a new **App Platform** app.
+2. Choose the GitHub repo and branch (`codewithyaars/AI-convert`, `main`).
+3. When prompted, you can either:
+   - let DO detect the `Dockerfile`, or
+   - import the spec from `.do/app.yaml`.
+4. Ensure the health check path is `/health`.
+5. Configure env vars as needed (upload size/timeouts).
+
 Options:
 - `--delimiter` (default `,`)
 - `--encoding` (default `utf-8`) for reading the input file

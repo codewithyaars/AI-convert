@@ -1,0 +1,20 @@
+name: ai-convert
+services:
+  - name: web
+    github:
+      repo: codewithyaars/AI-convert
+      branch: main
+      deploy_on_push: true
+    dockerfile_path: Dockerfile
+    http_port: 8080
+    routes:
+      - path: /
+    health_check:
+      http_path: /health
+    envs:
+      - key: CSV2JSON_MAX_UPLOAD_BYTES
+        value: "52428800" # 50MB
+      - key: CSV2JSON_JOB_TIMEOUT_SECONDS
+        value: "120"
+      - key: CSV2JSON_JOB_TTL_SECONDS
+        value: "600"

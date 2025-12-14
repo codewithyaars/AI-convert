@@ -340,6 +340,12 @@ def index() -> HTMLResponse:
     return HTMLResponse(INDEX_HTML)
 
 
+@app.get("/health")
+def health() -> Any:
+    # Used by deployment platforms for HTTP health checks.
+    return {"ok": True}
+
+
 @app.post("/api/jobs")
 async def create_job(
     file: UploadFile = File(...),  # noqa: B008
@@ -418,10 +424,13 @@ async def api_convert(
 def main() -> None:
     import uvicorn
 
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "8000"))
+
     uvicorn.run(
         "csv2json.web:app",
-        host="127.0.0.1",
-        port=8000,
+        host=host,
+        port=port,
         reload=True,
     )
 
